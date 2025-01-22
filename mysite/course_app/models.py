@@ -38,7 +38,7 @@ class Course(models.Model):
         ('продвинутый', 'продвинутый'),
     )
     level= models.CharField(max_length= 64, choices=LEVEL_CHOICES)
-    prise = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     created_bu = models.ForeignKey(UserProfile, on_delete= models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
@@ -94,7 +94,7 @@ class Certificate(models.Model):
     student = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete= models.CASCADE, related_name='certificate')
     issued_id = models. CharField(max_length=50)
-    certificate_uti = models.CharField(max_length=100)
+    certificate_url = models.CharField(max_length=100)
 
     def __str__(self):
         return f'{self.student}-{self.course}'
@@ -123,3 +123,6 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.course} -- {self.quantity}'
+
+    def get_total_price(self):
+        return self.course.price * self.quantity

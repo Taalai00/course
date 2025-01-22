@@ -7,8 +7,8 @@ router.register(r'user', UserProfileViewSet, basename='user')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('course/', CourseListAPIView.as_view(), name='course_list'),
-    path('course/<int:pk>/', CourseDetailAPIView.as_view(), name='course_detail'),
+    path('', CourseListAPIView.as_view(), name='course_list'),
+    path('<int:pk>/', CourseDetailAPIView.as_view(), name='course_detail'),
     path('course_list/', CourseListOwnerAPIView.as_view(), name ='course_list_owner'),
     path('course_list/<int:pk>/', CourseDetailUpdateDeleteOwnerAPIView.as_view(), name='edit'),
     path('course/create/', CourseCreateAPIView.as_view(), name='course_create'),
@@ -41,4 +41,8 @@ urlpatterns = [
 
     path('carts/', CartListAPIView.as_view(), name='cart_list'),
     path('carts/<int:pk>/', CartItemDetailAPiView.as_view(), name='cart_item_detail'),
+
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

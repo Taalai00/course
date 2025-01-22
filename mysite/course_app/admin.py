@@ -20,4 +20,3 @@ class CategoryAdmin(TranslationAdmin):
 admin.site.register(UserProfile)
 admin.site.register(Certificate)
 admin.site.register(Review)
-admin.site.register(Category)
